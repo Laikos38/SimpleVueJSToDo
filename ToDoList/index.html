@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>ToDo Vue</title>
+</head>
+
+<body class="bg-dark">
+
+    <!-- NAVIGATION BAR -->
+    <div>
+        <nav class="navbar navbar-darknavigation-clean d-flex justify-content-center" style="background-color: #282d32">
+            <a class="navbar-brand text-white" href="#">ToDo List Vue</a>
+        </nav>
+    </div>
+
+    <div id="app" class="container">
+        
+        <!-- CONTENT -->
+        <div class="container bg-dark">
+            <div class="mt-5">
+                <h3 class="text-center text-white">Items:</h3>
+
+                <div v-if="!items.length" class="p-3 bg-list-item text-center rounded text-white">
+                    No hay items.
+                </div>
+
+                <ul v-if="items" class="list-group text-white mb-5">
+                    <li v-for="(item, index) in items" class="list-group-item bg-list-item">
+                        <div class="d-flex align-items-center justify-content-between">
+                            {{ item.item }}
+                            <div>
+                                <button class="btn btn-circle" v-if="!item.done" v-on:click="item.done=!item.done"><i class="fa fa-square-o text-white"></i></button>
+                                <button class="btn btn-circle" v-if="item.done" v-on:click="item.done=!item.done"><i class="fa fa-check-square-o text-white"></i></button>
+                                <button class="btn btn-circle" v-on:click="modeEdit=true; inputItem=item.item; previousIndex=index;" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit text-white"></i></button>
+                                <button class="btn btn-circle" v-on:click="deleteItem(item)"><i class="fa fa-trash text-white"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="d-flex justify-content-center">
+                    <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-body d-flex flex-column">
+                        <h4>Agregar item</h4>
+                        <div>
+                            <input v-model="inputItem" id="inputAddItem" v-on:keyup.enter="addItem" type="text" class="form-control bg-dark text-white mb-3 mt-3">
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" v-on:click="modeEdit=false; inputItem='';" class="btn btn-secondary mr-3" data-dismiss="modal">Close</button>
+                            <button v-if="!modeEdit" v-on:click="addItem()" type="button" data-dismiss="modal" class="btn btn-primary">Agregar</button>
+                            <button v-if="modeEdit" v-on:click="editItem()" type="button" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-dark mt-3">
+        <footer>
+            <div class="container">
+                <div class="col item social">
+                    <a href="https://www.facebook.com/Laikos38/">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/franciscomaurino/">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </div>
+                <p class="copyright">Francisco Maurino © 2020</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Vuejs -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- local script -->
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>
