@@ -10,9 +10,11 @@ var app = new Vue({
     addItem: function () {
       this.items.push({item: this.inputItem, done: false});
       this.inputItem = '';
+      $('#myModal').modal('hide');
     },
     editItem: function () {
         this.items[this.previousIndex].item = this.inputItem;
+        $('#myModal').modal('hide');
     },
     deleteItem: function (item) {
         var index = this.items.indexOf(item);

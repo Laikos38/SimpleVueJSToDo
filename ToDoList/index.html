@@ -28,7 +28,7 @@
                 <h3 class="text-center text-white">Items:</h3>
 
                 <div v-if="!items.length" class="p-3 bg-list-item text-center rounded text-white">
-                    No hay items.
+                    There is no items.
                 </div>
 
                 <ul v-if="items" class="list-group text-white mb-5">
@@ -56,14 +56,14 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content bg-dark text-white">
                     <div class="modal-body d-flex flex-column">
-                        <h4>Agregar item</h4>
+                        <h4>Add item</h4>
                         <div>
                             <input v-model="inputItem" id="inputAddItem" v-on:keyup.enter="addItem" type="text" class="form-control bg-dark text-white mb-3 mt-3">
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" v-on:click="modeEdit=false; inputItem='';" class="btn btn-secondary mr-3" data-dismiss="modal">Close</button>
-                            <button v-if="!modeEdit" v-on:click="addItem()" type="button" data-dismiss="modal" class="btn btn-primary">Agregar</button>
-                            <button v-if="modeEdit" v-on:click="editItem()" type="button" data-dismiss="modal" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-primary" v-if="!modeEdit" v-on:click="addItem()" v-on:keyup.enter="addItem()" v-bind:disabled="!inputItem.length">Add item</button>
+                            <button type="button" class="btn btn-primary" v-if="modeEdit" v-on:click="editItem()" v-on:keyup.enter="editItem()" v-bind:disabled="!inputItem.length">Save changes</button>
                         </div>
                     </div>
                 </div>
