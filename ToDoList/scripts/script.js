@@ -15,6 +15,7 @@ var app = new Vue({
     editItem: function () {
         this.items[this.previousIndex].item = this.inputItem;
         $('#myModal').modal('hide');
+        this.modeEdit = false;
     },
     deleteItem: function (item) {
         var index = this.items.indexOf(item);
